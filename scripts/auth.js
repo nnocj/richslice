@@ -1,98 +1,121 @@
-// === Google One-Tap Login Setup ===
-window.onload = function () {
-    google.accounts.id.initialize({
-        client_id: "561740110276-uojmbodgp2vq25a79qaufdatp9ua4d9g.apps.googleusercontent.com", // My runvos-bm-appp real Google Client ID
-        callback: handleGoogleLogin
-    });
+const manualRegisterationUri = "https://runvos-bm-app.onrender.com/auth/register";
+const manualLoginUri = "https://runvos-bm-app.onrender.com/auth/login";
+const logoutUri = "https://runvos-bm-app.onrender.com/auth/logout";
+const authWithGoogle = "https://runvos-bm-app.onrender.com/auth/google";
 
-    google.accounts.id.renderButton(
-        document.getElementById("googleSignInDiv"),
-        { theme: "outline", size: "large" }
-    );
-};
+// Elements
+const accountLink = document.getElementById("account-link");
+const accountText = document.getElementById("account-text");
+const accountDialog = document.getElementById("account-dialog");
+const accountForm = document.getElementById("account-form");
+const switchModeBtn = document.getElementById("switch-mode");
+const closeDialogBtn = document.getElementById("close-dialog");
 
-// === Handle Google Login Response ===
-async function handleGoogleLogin(response) {
+let isLoginMode = true; // Toggle between login and register
+
+// Decode JWT helper
+function decodeJWT(token) {
     try {
-        const res = await fetch("https://runvos-bm-app.onrender.com/auth/google/callback", {
+        const payload = token.split(".")[1];
+        return JSON.parse(atob(payload));
+    } catch (e) {
+        console.error("Invalid token", e);
+        return null;
+    }
+}
+
+// Check if a user is already signed in
+document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+        const user = decodeJWT(token);
+        if (user) {
+            displayUser(user);
+        }
+    }
+});
+
+// Open dialog on Account click
+accountLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+        const user = decodeJWT(token);
+        if (user && confirm(`Sign out ${user.firstName || user.email}?`)) {
+            logoutUser();
+        }
+    } else {
+        accountDialog.showModal();
+    }
+});
+
+// Switch login/register mode
+switchModeBtn.addEventListener("click", () => {
+    isLoginMode = !isLoginMode;
+    document.getElementById("account-title").textContent = isLoginMode ? "Sign In" : "Register";
+    document.getElementById("account-submit").textContent = isLoginMode ? "Login" : "Register";
+    switchModeBtn.textContent = isLoginMode ? "Need an account?" : "Already have an account?";
+});
+
+// Close dialog
+closeDialogBtn.addEventListener("click", () => accountDialog.close());
+
+// Handle login/register submit
+accountForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("account-email").value.trim();
+    const password = document.getElementById("account-password").value.trim();
+
+    const endpoint = isLoginMode ? manualLoginUri : manualRegisterationUri;
+
+    try {
+        const res = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ credential: response.credential })
+            body: JSON.stringify({ email, password })
         });
+
+        if (!res.ok) throw new Error("Authentication failed");
 
         const data = await res.json();
 
-        if (data?.accessToken) {
-            // Store tokens
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("refreshToken", data.refreshToken);
+        // Save tokens
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
 
-            // Store user info for initials display
-            handleLoginSuccess({
-                firstName: data.firstName,
-                lastName: data.lastName,
-                email: data.email
-            });
-
-            alert("Logged in with Google!");
-            accountDialog.close();
-        } else {
-            alert(data?.error || "Google login failed");
+        // Decode and store minimal user info
+        const user = decodeJWT(data.accessToken);
+        if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+            displayUser(user);
         }
+
+        accountDialog.close();
     } catch (err) {
-        console.error(err);
-        alert("Error during Google login");
+        alert(err.message);
     }
+});
+
+// Google Sign In
+document.getElementById("googleSignInDiv").addEventListener("click", () => {
+    window.location.href = authWithGoogle; // Redirect to Google login
+});
+
+// Display user name/email
+function displayUser(user) {
+    accountText.textContent = user.name || user.email;
 }
 
-// === Update Nav Display with Initials ===
-function updateAccountDisplay() {
-    const accountText = document.getElementById("account-text");
-    const firstName = localStorage.getItem("firstName");
-    const lastName = localStorage.getItem("lastName");
-
-    if (firstName && lastName) {
-        const initials = `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
-        accountText.textContent = initials;
-    } else {
-        accountText.textContent = "Account";
+// Logout
+async function logoutUser() {
+    try {
+        await fetch(logoutUri, { method: "POST", credentials: "include" });
+    } catch (err) {
+        console.warn("Logout request failed, clearing local data anyway.");
     }
-}
-
-// === Store User Info After Login ===
-function handleLoginSuccess(userData) {
-    localStorage.setItem("firstName", userData.firstName || "");
-    localStorage.setItem("lastName", userData.lastName || "");
-    localStorage.setItem("userEmail", userData.email || "");
-    updateAccountDisplay();
-}
-
-// === Clear User Info on Logout ===
-function handleLogout() {
-    localStorage.removeItem("firstName");
-    localStorage.removeItem("lastName");
-    localStorage.removeItem("userEmail");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    updateAccountDisplay();
+    localStorage.removeItem("user");
+    accountText.textContent = "Account";
 }
-
-// Run on page load
-document.addEventListener("DOMContentLoaded", function () {
-    updateAccountDisplay();
-
-    const accountLink = document.getElementById("account-link");
-    const accountDialog = document.getElementById("account-dialog");
-
-    accountLink.addEventListener("click", function (e) {
-        e.preventDefault();
-        // Check if logged in
-        const token = localStorage.getItem("accessToken");
-        if (token) {
-            // later you can show a dropdown for logout/profile
-            alert("Already logged in");
-        } else {
-            accountDialog.showModal();
-        }
-    });
-});

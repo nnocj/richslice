@@ -8,7 +8,7 @@ hamButton.addEventListener('click', () => {
     navigation.classList.toggle('open');
     hamButton.classList.toggle('open');
     animateMe.classList.toggle("open");
-    headerTitle.classList.toggle('hide'); // Hide the title when the hamburger is open
+   // headerTitle.classList.toggle('hide'); // Hide the title when the hamburger is open
 });
 
 // Courses array
@@ -105,9 +105,9 @@ function renderCourses(filteredCourses) {
 }
 
 // View all courses
-viewAll.addEventListener('click', () => {
+/*viewAll.addEventListener('click', () => {
     renderCourses(courses);
-});
+});*/
 
 // View only CSE courses
 onlyCse.addEventListener('click', () => {
