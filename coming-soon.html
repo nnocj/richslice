@@ -67,6 +67,28 @@
             </dialog>
         </section>
        
+        <dialog id="account-dialog">
+            <form method="dialog" id="account-form">
+                <h3 id="account-title">Sign In</h3>
+                <label>Email:
+                    <input type="email" id="account-email" required>
+                </label>
+                <label>Password:
+                    <input type="password" id="account-password" required>
+                </label>
+                <div>
+                    <button type="submit" id="account-submit">Login</button>
+                    <button type="button" id="switch-mode">Need an account?</button>
+                    <button type="button" id="close-dialog">Cancel</button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div id="googleSignInDiv"></div>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Google Identity Services -->
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     
     </main>
