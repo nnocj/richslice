@@ -1,6 +1,7 @@
+// === Google One-Tap Login Setup ===
 window.onload = function () {
     google.accounts.id.initialize({
-        client_id: "561740110276-uojmbodgp2vq25a79qaufdatp9ua4d9g.apps.googleusercontent.com", //my runvos-bm-app real Google client ID
+        client_id: "561740110276-uojmbodgp2vq25a79qaufdatp9ua4d9g.apps.googleusercontent.com", // My runvos-bm-appp real Google Client ID
         callback: handleGoogleLogin
     });
 
@@ -10,7 +11,7 @@ window.onload = function () {
     );
 };
 
-// Send Google token to my external backend
+// === Handle Google Login Response ===
 async function handleGoogleLogin(response) {
     try {
         const res = await fetch("https://runvos-bm-app.onrender.com/auth/google/callback", {
@@ -20,12 +21,19 @@ async function handleGoogleLogin(response) {
         });
 
         const data = await res.json();
-        //Here is where i apply local storage setting items
+
         if (data?.accessToken) {
+            // Store tokens
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
-            localStorage.setItem("userEmail", data.email || "");
-            accountLink.textContent = "Logout";
+
+            // Store user info for initials display
+            handleLoginSuccess({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email
+            });
+
             alert("Logged in with Google!");
             accountDialog.close();
         } else {
@@ -37,24 +45,21 @@ async function handleGoogleLogin(response) {
     }
 }
 
-//using this function i get local storage items
+// === Update Nav Display with Initials ===
 function updateAccountDisplay() {
     const accountText = document.getElementById("account-text");
     const firstName = localStorage.getItem("firstName");
     const lastName = localStorage.getItem("lastName");
 
     if (firstName && lastName) {
-        const initials = firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase();
+        const initials = `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
         accountText.textContent = initials;
     } else {
         accountText.textContent = "Account";
     }
 }
 
-// Run on page load
-document.addEventListener("DOMContentLoaded", updateAccountDisplay);
-
-// After login or Google login
+// === Store User Info After Login ===
 function handleLoginSuccess(userData) {
     localStorage.setItem("firstName", userData.firstName || "");
     localStorage.setItem("lastName", userData.lastName || "");
@@ -62,10 +67,32 @@ function handleLoginSuccess(userData) {
     updateAccountDisplay();
 }
 
-// On logout
+// === Clear User Info on Logout ===
 function handleLogout() {
     localStorage.removeItem("firstName");
     localStorage.removeItem("lastName");
     localStorage.removeItem("userEmail");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     updateAccountDisplay();
 }
+
+// Run on page load
+document.addEventListener("DOMContentLoaded", function () {
+    updateAccountDisplay();
+
+    const accountLink = document.getElementById("account-link");
+    const accountDialog = document.getElementById("account-dialog");
+
+    accountLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        // Check if logged in
+        const token = localStorage.getItem("accessToken");
+        if (token) {
+            // later you can show a dropdown for logout/profile
+            alert("Already logged in");
+        } else {
+            accountDialog.showModal();
+        }
+    });
+});

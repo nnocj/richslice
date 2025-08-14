@@ -1,4 +1,4 @@
-const foodUrl = 'https://nnocj.github.io/wdd231/richslice/data/food.json';
+const foodUrl = 'https://nnocj.github.io/richslice/data/food.json';
 const foodContainer = document.querySelector('.food-cards');
 const dialog = document.getElementById('food-dialog');
 const dialogContent = document.querySelector('.dialog-content');
