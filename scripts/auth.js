@@ -1,35 +1,38 @@
-const registerUri = "https://runvos-bm-app.onrender.com/auth/register";
-const loginUri = "https://runvos-bm-app.onrender.com/auth/login";
-const logoutUri = "https://runvos-bm-app.onrender.com/auth/logout";
-
-async function registerUser(email, password) {
-    const response = await fetch(registerUri, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
+window.onload = function () {
+    google.accounts.id.initialize({
+        client_id: "561740110276-uojmbodgp2vq25a79qaufdatp9ua4d9g.apps.googleusercontent.com", //my runvos-bm-app real Google client ID
+        callback: handleGoogleLogin
     });
-    return response.json();
-}
 
-async function loginUser(email, password) {
-    const response = await fetch(loginUri, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
-    });
-    return response.json();
-}
+    google.accounts.id.renderButton(
+        document.getElementById("googleSignInDiv"),
+        { theme: "outline", size: "large" }
+    );
+};
 
-async function logoutUser() {
-    const response = await fetch(logoutUri, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
+// Send Google token to my external backend
+async function handleGoogleLogin(response) {
+    try {
+        const res = await fetch("https://runvos-bm-app.onrender.com/auth/google/callback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ credential: response.credential })
+        });
+
+        const data = await res.json();
+
+        if (data?.accessToken) {
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
+            localStorage.setItem("userEmail", data.email || "");
+            accountLink.textContent = "Logout";
+            alert("Logged in with Google!");
+            accountDialog.close();
+        } else {
+            alert(data?.error || "Google login failed");
         }
-    });
-    return response.json();
+    } catch (err) {
+        console.error(err);
+        alert("Error during Google login");
+    }
 }
