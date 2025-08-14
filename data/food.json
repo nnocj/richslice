@@ -1,0 +1,89 @@
+{
+    "foods": [
+
+      {
+        "name": " Samosa",
+        "price": " ¢8.00",
+        "image_file_name": "https://nnocj.github.io/wdd231/richslice/images/samosa.webp",
+        "image_url": "../images/samosa.webp",
+        "rating": 4,
+        "key_ingredients": "Meat, Potatoes, Spices",
+        "origin": "India, Middle East, East Africa",
+        "description": "A crispy, triangular pastry filled with spiced meat or vegetables."
+        },
+        {
+        "name": " Waakye",
+        "price": " ¢25.00",
+        "image_file_name": "https://nnocj.github.io/wdd231/richslice/images/waakye.jpg",
+        "image_url": "../images/waakye.jpg",
+        "rating": 5,
+        "key_ingredients": "Ricem beans, sphagetti, fish, eggs, plantain",
+        "origin": "Ghana",
+        "description": "A hearty rice and beans dish often served with sides like fish, spaghetti, and eggs."
+
+        },
+      {
+        "name": " Kenkey",
+        "price": " ¢16.00",
+        "image_file_name": "https://nnocj.github.io/wdd231/richslice/images/kenkey.webp",
+        "image_url": "../images/kenkey.webp",
+        "rating": 3,
+        "key_ingredients": "Corn, fish, pepper sauce",
+        "origin": "Ghana (Ga and Fante people)",
+        "description":"Fermented corn dough dumpling, usually served with pepper sauce and fish."
+
+        },
+       {
+        "name": " Pounded Yam with Egusi Soup",
+        " price": " ¢25.00",
+        "image_file_name": "https://nnocj.github.io/wdd231/richslice/images/yam-egusi.jpg",
+        "image_url": "../images/yam-egusi.jpg",
+        "rating": 4,
+        "key_ingredients": "Yam, Egusi seeds, vegetables",
+        "origin":"Nigeria (Yoruba), also common in West Africa",
+        "description": "Smooth yam mash eaten with a thick melon seed soup."
+      },
+        {
+        "name": " Fufu",
+        "price": " ¢35.00",
+        "image_file_name": "https://nnocj.github.io/wdd231/richslice/images/fufu.webp",
+        "image_url": "../images/fufu.webp",
+        "rating": 3,
+        "key_ingredients": "Cassava, plantain, palm juice",
+        "origin": "Ghana, Nigeria, Ivory Coast",
+        "description:": "Starchy dough made from cassava and plantain, eaten with soup or stew."
+        },
+        {
+        "name": " Jollof Rice",
+        "price": " ¢30.00",
+        "image_file_name": "https://nnocj.github.io/wdd231/richslice/images/jollof.jpeg",
+        "image_url": "../images/jollof.jpeg",
+        "rating": 5,
+        "key_ingredients": "Rice, tomatoes, spices, vegetables, meat",
+        "origin": "Senegal (Wolof people), popular in West Africa",
+        "description": "Spicy, tomato-based rice dish cooked with meat or vegetables."
+        },
+        {
+        "name": " Chakalaka (Soweto chilli)",
+        "price": " ¢18.00",
+        "image_file_name": "https://nnocj.github.io/wdd231/richslice/images/soweto-chilli.webp",
+        "image_url": "../images/soweto-chilli.webp",
+        "rating": 4,
+        "key_ingredients": "beans, tomatoes, onions, peppers, spices",
+        "origin": "South Africa",
+        "description": "Spicy vegetable relish made with beans, onions, and peppers."
+        },
+        {
+        "name": " Cauliflower Soup",
+        "price": " ¢40.00",
+        "image_file_name": "https://nnocj.github.io/wdd231/richslice/images/cauliflower-soup.webp",
+        "image_url": "../images/cauliflower-soup.webp",
+        "rating": 5,
+        "key_ingredients": "Cauliflower, onions, garlic, spices",
+        "Origin": "Global (popular in European and Western cuisines)",
+        "description": "Creamy soup made from blended cauliflower and spices."
+        }
+        
+    ]
+}
+  

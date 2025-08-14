@@ -1,0 +1,82 @@
+
+main {
+  justify-items: center;
+}
+
+form {
+  margin: 1rem 2%;
+}
+
+form label {
+  display: block;
+  font-size: 0.8rem;
+  color: purple;
+  padding-top: 0.2rem;
+}
+
+form h2 {
+  font-size: 0.9rem;
+  color: #ca4a26;
+  margin: 1.5rem 0 0.2rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+form input[type="text"],
+form input[type="tel"],
+form input[type="date"],
+form input[type="email"],
+form select {
+  display: block;
+  margin: 0.1rem 0 1rem 0;
+  padding: 0.3rem;
+  border: 1px solid #999;
+  border-radius: 4px;
+  border-left-width: 5px;
+  border-left-color: #555;
+  font-size: 1rem;
+  color: #3D405B;
+  width: 250px;
+}
+
+form input:required {
+  border-left-color: #d70000;
+}
+
+form input:focus {
+  border-left-color: black;
+  outline: none;
+}
+
+form input:required:valid {
+  border-left-color: green;
+}
+
+form input[type="submit"] {
+  border: none;
+  text-align: center;
+  background-color: #3D405B;
+  color: white;
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  margin: 2rem 0;
+  font-size: 1.2rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #3D405B;
+}
+
+#results {
+  background-color: #F4F1DE;
+  padding: 0 1rem;
+  border: 1px solid #E07A5F;
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  #hero-image {
+    min-height: 80px;
+  }
+}

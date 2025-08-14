@@ -1,0 +1,17 @@
+{
+  "heroImages": [
+    {
+      "image": "https://nnocj.github.io/wdd231/richslice/images/hero1.webp",
+      "alt": "Delicious Ghanaian Dish"
+    },
+    {
+      "image": "https://nnocj.github.io/wdd231/richslice/images/hero2.webp",
+      "alt": "Sizzling Nigerian Egusi Soup"
+    },
+    {
+      "image": "https://nnocj.github.io/wdd231/richslice/images/hero3.webp",
+      "alt": "Colorful West African Cuisine"
+    }
+  ]
+}
+  

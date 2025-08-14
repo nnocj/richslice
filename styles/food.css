@@ -1,0 +1,147 @@
+
+#search-button {
+        position: absolute;
+        font-size: 1.25em;
+        color: rgb(8, 47, 33);
+        background-color: transparent;
+        top: 40px;
+        right: 1rem;
+        padding: 0;
+        border:none;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+}
+
+#hero-image {
+    width: 100%;
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+    
+}
+
+.view-nav {
+    display: grid;
+    justify-self: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.view-nav button:hover {
+    background-color:rgb(24, 91, 186);
+}
+
+.view-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+}
+
+.food-cards {
+    border-top: 1px solid rgb(207, 221, 232);
+    /*display: block;*/
+    /*justify-self: center;*/ 
+    flex-wrap: wrap;
+    flex-direction: column; 
+    margin: 5px 30px;
+
+
+}
+
+.food-cards section {
+    display: block;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    border: 1px  rgb(2, 20, 13);
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 10px gray;
+    padding:10px;
+
+}
+
+
+.course-count {
+    display: flex;
+    justify-self: center;
+}
+
+
+#animateme, .head-nav {
+    display: grid;
+    grid-template-rows: 0fr; 
+    transition: grid-template-rows 0.5s ease-in-out;
+    overflow: hidden;
+
+}
+
+#animateme.open {
+    grid-template-rows: 1fr; /*Expands smoothly*/
+}
+
+.head-nav {
+    overflow: hidden;
+}
+
+.hero-section h1{
+    display: none;
+   visibility: hidden;
+}
+.foods {
+    margin: 20px;
+}
+
+
+#vertical-align p {
+    font-size: 1rem;
+}
+
+#vertical-align #large-font {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+#vertical-align {
+    align-self:flex-end;
+}
+
+/* Default Flex Container */
+.member-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Block Layout */
+.block {
+    display: block;
+}
+
+/* This is for the index page */
+@media screen and (max-width: 768px) {
+    .index-food {
+        display: grid;
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .index-food {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    }
+}

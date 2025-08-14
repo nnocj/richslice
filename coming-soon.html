@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Rich slice Foods - Home Page</title>
+    <meta name="description" content="Rich Slice Foods Home Page">
+    <meta name="author" content="Nicholas Oblitey Commey">
+    <meta property="og:url"   content="https://nnocj.github.io/wdd231/richslice/index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title"  content="Home Page">
+    <meta property="og:description"  content="Tastevar Foods Home Page">
+    <meta property="og:image"   content="https://nnocj.github.io/wdd231/richslice/images/semosa-1.png">
+    <meta property="fb:app_id" content="1139284367865426">
+    <meta name = "twitter:card" content="Tastevar Foods Home Page">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link href="styles/index.css" rel="stylesheet">
+    <link href="styles/food.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="https://nnocj.github.io/wdd231/richslice/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="scripts/index.js" defer></script>
+    <script src="../scripts/getdates.js" defer></script>
+    <script src="../scripts/course.js" defer></script>
+    <script src="scripts/food.js" defer></script>
+    
+</head>
+<body>
+    <header class="header">
+        <div class="page-profile">
+            <button type="button" id="menu" aria-label="Toggle navigation"></button>
+            <button id="light-dark" onclick="toggleMode()">🌗</button>
+            <img src="images/rich-slice.png" alt="A Profile Picture" width="50" height="50">
+            <div id="vertical-align">
+                <h2 id="large-font">Rich Slice Foods</h2>
+                <p id="small-font">Feel Home and Explore Variety</p>
+            </div>
+        </div>
+        <div id="animateme">
+            <nav class="head-nav" id="head-nav">
+                <a href="./index.html" class="each-link">Home</a>
+                <a href="./food.html" class="each-link">Food</a>
+                <a href="#" class="active each-link">Coming Soon</a>
+                <a href="./contact.html" class="each-link">Contact</a>
+            </nav>  
+        </div>
+    </header>
+    <main>
+        <section class="hero-section">
+            <img id="hero-image" src="images/food-variety1.jpg" alt="A variety of food">
+            <h1>Rich Slice Foods - Upcoming Page</h1>
+        </section>
+        
+        <section class="foods">
+            <h2>Explore Foods that will soon be on our menu </h2>
+            <p>Discover a wide range of delicious foods that will soon be available at Rich Slice Foods. From savory dishes to sweet treats, we have something for everyone.</p>
+        </section>
+        <section>
+            <h3 class="invisible-header">Header</h3>
+            <div class="food-cards grid"></div>
+
+            <!-- Dialog -->
+            <dialog id="food-dialog">
+                <div class="dialog-content"></div>
+            </dialog>
+        </section>
+       
+
+    
+    </main>
+    <footer>
+        <div>
+            <h3>Rich Slice Foods</h3>
+            <p>207 Naa Adoley Adotey Street</p>
+            <p>Accra, Dansoman Beach Road</p>
+            <p>richslice@gmail.com</p>
+            <p>(233)592960418</p>
+        </div>
+        <div class="social-media">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                <img src="images/icons8-instagram-48.png" alt="Instagram" width="32" height="32">
+              </a>
+              <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
+                <img src="images/twitter-logo-2429.svg" alt="X (formerly Twitter)" width="32" height="32">
+              </a>
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                <img src="images/icons8-facebook-48.png" alt="Facebook" width="32" height="32">
+              </a>              
+        </div>
+        <div>
+            <p>WDD231 Class Project</p>
+            <p>©<span id="year"></span> 🍕 Nicholas Oblitey Commey 🍕 Ghana</p>
+            <p>Last modification: <span id="lastModified"></span></p>
+        </div>
+    </footer>
+</body>
+</html>
