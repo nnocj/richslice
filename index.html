@@ -118,20 +118,40 @@
                 </p>
             </div>
         </section>
-        <dialog id="account-dialog">
+       <dialog id="account-dialog">
             <form method="dialog" id="account-form">
                 <h3 id="account-title">Sign In</h3>
+
+                <!-- First Name (hidden by default, shown for register) -->
+                <label id="label-first-name" style="display: none;">
+                    First Name:
+                    <input type="text" id="account-firstName">
+                </label>
+
+                <!-- Last Name (hidden by default, shown for register) -->
+                <label id="label-last-name" style="display: none;">
+                    Last Name:
+                    <input type="text" id="account-lastName">
+                </label>
+
+                <!-- Email -->
                 <label>Email:
                     <input type="email" id="account-email" required>
                 </label>
+
+                <!-- Password -->
                 <label>Password:
                     <input type="password" id="account-password" required>
                 </label>
+
+                <!-- Buttons -->
                 <div>
                     <button type="submit" id="account-submit">Login</button>
                     <button type="button" id="switch-mode">Need an account?</button>
                     <button type="button" id="close-dialog">Cancel</button>
                 </div>
+
+                <!-- Google Sign In -->
                 <div style="margin-top: 10px;">
                     <div id="googleSignInDiv">Sign in with Google</div>
                 </div>
