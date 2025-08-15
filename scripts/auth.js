@@ -104,7 +104,8 @@ document.getElementById("googleSignInDiv").addEventListener("click", () => {
 
 // Display user name/email
 function displayUser(user) {
-    accountText.textContent = `${user.firstName} ${user.lastName}` || `${user.email}`;
+    const content = `${user.name}  ${user.email}`;
+    accountText.textContent = content;
 }
 
 // Logout

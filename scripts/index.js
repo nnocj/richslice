@@ -1,46 +1,16 @@
+const hamButton = document.querySelector('#menu');
+const navigation = document.querySelector('.head-nav');
+const animateMe = document.getElementById("animateme");
+const headerTitle = document.querySelector('.header-h1');
 
-/*const displayFilteredFoods = (foods)=> {
+// Hamburger menu logic
+hamButton.addEventListener('click', () => {
+    navigation.classList.toggle('open');
+    hamButton.classList.toggle('open');
+    animateMe.classList.toggle("open");
+   // headerTitle.classList.toggle('hide'); // Hide the title when the hamburger is open
+});
 
-    // building the random aspect
-    const shuffledFoods = foods.sort(()=> Math.random() - 0.5);
-    
-    shuffledFoods.forEach(food => {
-        if (food.rating == 5){
-            let card = document.createElement('section');
-            let logo = document.createElement('img');
-            let name = document.createElement('p');
-            let price = document.createElement('p');
-            let keyIngredient = document.createElement('p');
-            
-            logo.setAttribute('alt', `${food.name} logo`);
-            logo.setAttribute('src', food.image_file_name);
-            logo.setAttribute('loading', 'lazy');
-            name.textContent = food.name;
-            price.textContent = food.price;
-            keyIngredient.textContent = food.key_ingredients;
-
-            card.appendChild(logo);
-            card.appendChild(name);
-            card.appendChild(price);
-            card.appendChild(keyIngredient);
-            const cards = document.querySelector('.food-cards');
-
-            cards.appendChild(card);
-        
-        }
-    });
-}
-
-async function getFoodsData() {
-    const url = 'https://nnocj.github.io/wdd231/richslice/data/food.json';
-    const response = await fetch(url);
-    const data = await response.json();
-    // console.table(data.prophets);
-    displayFilteredFoods(data.foods)
-    
-}
-
-getFoodsData();*/
 
 //when the light-dark button is clicked or toggled, the header should change
 // light mode and dark mode
