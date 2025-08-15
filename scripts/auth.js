@@ -102,6 +102,39 @@ document.getElementById("googleSignInDiv").addEventListener("click", () => {
     window.location.href = authWithGoogle; // Redirect to Google login
 });
 
+// On page load, check if Google sent back tokens
+document.addEventListener("DOMContentLoaded", () => {
+    // Extract tokens from URL if present
+    const urlParams = new URLSearchParams(window.location.search);
+    const accessToken = urlParams.get("accessToken");
+    const refreshToken = urlParams.get("refreshToken");
+
+    if (accessToken && refreshToken) {
+        // Save tokens to localStorage
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+
+        // Decode token to get user info
+        const user = decodeJWT(accessToken);
+        if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+            displayUser(user);
+        }
+
+        // Remove tokens from URL for cleanliness
+        window.history.replaceState({}, document.title, window.location.pathname);
+    } else {
+        // If no tokens from Google, check existing login
+        const savedToken = localStorage.getItem("accessToken");
+        if (savedToken) {
+            const savedUser = decodeJWT(savedToken);
+            if (savedUser) {
+                displayUser(savedUser);
+            }
+        }
+    }
+});
+
 // Display user name/email
 function displayUser(user) {
     const content = `${user.name}  ${user.email}`;

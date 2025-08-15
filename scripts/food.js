@@ -52,7 +52,9 @@ const displayFoods = (foods) => {
            
         });
 
-        foodContainer.appendChild(card);
+        if (foodContainer) {
+            foodContainer.appendChild(card);
+        }
     });
 };
 
@@ -63,9 +65,7 @@ async function getFoodData() {
 }
 
 getFoodData();
-
-
-document.addEventListener('click', (e) => {
+document.addEventListener('click', () => {
     if (dialog.open) {
         dialog.close();
     }
